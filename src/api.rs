@@ -26,8 +26,10 @@ impl APIClient {
     ///
     /// See [reqwest docs](https://docs.rs/reqwest/0.9.*/reqwest/struct.Client.html#panic) for more information.
     pub fn new(token: impl Into<String>) -> APIClient {
+        let proxy =
+            reqwest::Proxy::https("http://DevDev123:L4h2QqY@213.159.204.250:65233").unwrap();
         APIClient {
-            client: Client::new(),
+            client: Client::builder().proxy(proxy).build().unwrap(),
             token: token.into(),
         }
     }
